@@ -1,0 +1,61 @@
+<div class="orders-list">
+  <h2>All Orders</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>Order ID</th>
+        <th>Product ID</th>
+        <th>Delivery Address</th>
+        <th>Order Status</th>
+        <th>Created At</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let order of orders">
+        <td>{{ order?.order_id }}</td>
+        <td>{{ order?.product_id }}</td>
+        <td>{{ order?.delivery_address }}</td>
+        <td>{{ order?.order_status }}</td>
+        <td>{{ order?.created_at }}</td>
+        <td>
+          <button (click)="deleteOrder(order.order_id)">Delete</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- update-order.component.html -->
+<div class="order-form">
+  <h2>Update Order</h2>
+  <form (ngSubmit)="updateOrder()">
+    <label for="productId">Order ID:</label>
+    <input
+      type="text"
+      id="productId"
+      [(ngModel)]="productId"
+      name="productId"
+      required
+    />
+    <label for="order_id">Status</label>
+    <input
+      type="text"
+      id="status"
+      [(ngModel)]="status"
+      name="status"
+      required
+    />
+
+    <label for="deliveryAddress">Delivery Address:</label>
+    <input
+      type="text"
+      id="deliveryAddress"
+      [(ngModel)]="deliveryAddress"
+      name="deliveryAddress"
+      required
+    />
+
+    <button type="submit">Update Order</button>
+  </form>
+</div>

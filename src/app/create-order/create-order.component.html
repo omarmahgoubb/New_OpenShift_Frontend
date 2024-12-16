@@ -1,0 +1,25 @@
+<div class="order-form">
+  <h2>Create Order</h2>
+  <form (ngSubmit)="createOrder()">
+    
+    <label for="productId">Product Name:</label>
+    <input type="text" id="productId" [(ngModel)]="product_id" name="productId" required>
+
+    <label for="deliveryAddress">Delivery Address:</label>
+    <input type="text" id="deliveryAddress" [(ngModel)]="delivery_address" name="deliveryAddress" required>
+
+    <label for="pickupLocation">Pickup Location:</label>
+    <input type="text" id="pickupLocation" [(ngModel)]="pickup_location" name="pickupLocation" required>
+
+    <label for="dropoffLocation">Drop-off Location:</label>
+    <input type="text" id="dropoffLocation" [(ngModel)]="dropoff_location" name="dropoffLocation" required>
+
+    <label for="packageDetails">Package Details:</label>
+    <textarea id="packageDetails" [(ngModel)]="package_details" name="packageDetails" required></textarea>
+
+    <label for="deliveryTime">Delivery Time:</label>
+    <input type="datetime-local" id="deliveryTime" [(ngModel)]="delivery_time" name="deliveryTime" required>
+
+    <button type="submit">Create Order</button>
+  </form>
+</div>

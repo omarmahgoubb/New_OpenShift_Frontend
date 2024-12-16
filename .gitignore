@@ -1,0 +1,10 @@
+# Ignore node_modules (as it's tracked by LFS)
+node_modules/
+
+# Ignore other typical files
+*.log
+*.tmp
+.env
+
+# Other files you want to ignore go here
+

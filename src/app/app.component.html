@@ -1,0 +1,25 @@
+<!-- src/app/app.component.html -->
+
+<!-- Navbar or sidebar to switch between views -->
+<nav class="selection-container">
+  <button (click)="showForm('register')">Register</button>
+  <button (click)="showForm('login')">Login</button>
+  <button (click)="showForm('create-order')">Create Order</button>
+  <button (click)="showForm('my-orders')">My Orders</button>
+  <button (click)="showForm('order-details')">Order Details</button>
+  <button (click)="showForm('courier-info')">Courier Info</button>
+  <button (click)="showForm('update-order-status')">Update Order Status</button>
+  <button (click)="showForm('all-orders')">All Orders</button>
+  <button (click)="showForm('assigned-orders')" *ngIf="isAdmin()">Assigned Orders</button> <!-- Only visible for admin -->
+</nav>
+
+<!-- Display each component based on selectedForm -->
+<app-register *ngIf="selectedForm === 'register'"></app-register>
+<app-login *ngIf="selectedForm === 'login'"></app-login>
+<app-create-order *ngIf="selectedForm === 'create-order'"></app-create-order>
+<app-my-orders *ngIf="selectedForm === 'my-orders'"></app-my-orders>
+<app-order-details *ngIf="selectedForm === 'order-details'"></app-order-details>
+<app-courier-info *ngIf="selectedForm === 'courier-info'"></app-courier-info>
+<app-update-order-status *ngIf="selectedForm === 'update-order-status'"></app-update-order-status>
+<app-all-orders *ngIf="selectedForm === 'all-orders'"></app-all-orders>
+<app-assigned-orders *ngIf="selectedForm === 'assigned-orders'"></app-assigned-orders>

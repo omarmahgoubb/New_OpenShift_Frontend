@@ -1,0 +1,42 @@
+.update-order-status-form {
+  width: 300px;
+  margin: 0 auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+}
+
+.update-order-status-form h2 {
+  text-align: center;
+}
+
+.update-order-status-form form {
+  display: flex;
+  flex-direction: column;
+}
+
+.update-order-status-form label {
+  margin-bottom: 8px;
+}
+
+.update-order-status-form input,
+.update-order-status-form select {
+  padding: 8px;
+  margin-bottom: 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.update-order-status-form button {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 10px;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.update-order-status-form button:hover {
+  background-color: #0056b3;
+}

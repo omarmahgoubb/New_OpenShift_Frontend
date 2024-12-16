@@ -1,0 +1,18 @@
+.orders-list {
+  max-width: 800px;
+  margin: auto;
+}
+
+.orders-list table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.orders-list th, .orders-list td {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+.orders-list th {
+  background-color: #f2f2f2;
+}

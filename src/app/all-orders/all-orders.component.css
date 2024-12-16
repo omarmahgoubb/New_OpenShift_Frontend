@@ -1,0 +1,91 @@
+.orders-list {
+    max-width: 800px;
+    margin: auto;
+  }
+  
+  .orders-list table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  .orders-list th, .orders-list td {
+    border: 1px solid #ddd;
+    padding: 8px;
+  }
+  
+  .orders-list th {
+    background-color: #f2f2f2;
+  }
+
+/* Styling for the order form */
+.order-form {
+  max-width: 400px;
+  margin: 0 auto;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  background-color: #f9f9f9;
+}
+
+.order-form h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.order-form label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 5px;
+  color: #555;
+}
+
+.order-form input[type="text"],
+.order-form input[type="date"],
+.order-form select,
+.order-form textarea {
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+  font-size: 14px;
+}
+
+.order-form input[type="text"]:focus,
+.order-form input[type="date"]:focus,
+.order-form select:focus,
+.order-form textarea:focus {
+  border-color: #4a90e2;
+  outline: none;
+  box-shadow: 0 0 5px rgba(74, 144, 226, 0.3);
+}
+
+.order-form button[type="submit"] {
+  width: 100%;
+  padding: 10px;
+  background-color: #4a90e2;
+  border: none;
+  border-radius: 4px;
+  color: #fff;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.order-form button[type="submit"]:hover {
+  background-color: #357abd;
+}
+
+.order-form button[type="submit"]:active {
+  background-color: #2a5d91;
+}
+
+.order-form button[type="submit"]:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+

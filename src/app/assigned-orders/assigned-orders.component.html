@@ -1,0 +1,41 @@
+<div class="assigned-orders-container">
+  <h2>Orders Assigned to {{ courierName }}</h2>
+
+  <!-- Error Message Section -->
+  <div *ngIf="errorMessage" class="error-message">
+    <p>{{ errorMessage }}</p>
+  </div>
+
+  <!-- Courier Search -->
+  <div class="courier-search">
+    <label for="courierSearch">Enter Courier Name:</label>
+    <input type="text" [(ngModel)]="courierName" placeholder="Courier name">
+    <button class="btn-small" (click)="fetchAssignedOrders()">Fetch Orders</button>
+  </div>
+
+  <!-- Orders List -->
+  <div class="orders-list" *ngIf="orders.length > 0; else noOrders">
+    <ul>
+      <li *ngFor="let order of orders" class="order-item">
+        <p><strong>Order ID:</strong> {{ order._id }}</p>
+        <p><strong>Product ID:</strong> {{ order.product_id }}</p>
+        <p><strong>Delivery Address:</strong> {{ order.delivery_address }}</p>
+        <p><strong>Pickup Location:</strong> {{ order.pickup_location }}</p>
+        <p><strong>Dropoff Location:</strong> {{ order.dropoff_location }}</p>
+        <p><strong>Status:</strong> {{ order.order_status }}</p>
+
+        <!-- Input for reassignment -->
+        <div class="reassign-section">
+          <label for="newCourier">Reassign to Courier:</label>
+          <input type="text" [(ngModel)]="newCourierNames[order._id]" placeholder="New courier name">
+          <button class="btn-small" (click)="reassignOrder(order._id)">Reassign Order</button>
+        </div>
+      </li>
+    </ul>
+  </div>
+
+  <!-- Message if no orders are assigned -->
+  <ng-template #noOrders>
+    <p>No orders found for this courier.</p>
+  </ng-template>
+</div>

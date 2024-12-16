@@ -1,0 +1,21 @@
+<div class="update-order-status-form">
+  <h2>Update Order Status</h2>
+  
+  <form (ngSubmit)="updateOrderStatus()">
+    <div>
+      <label for="order_id">Order ID:</label>
+      <input type="text" id="order_id" [(ngModel)]="order_id" name="order_id" required />
+    </div>
+    
+    <div>
+      <label for="new_status">New Status:</label>
+      <select id="new_status" [(ngModel)]="new_status" name="new_status" required>
+        <option *ngFor="let status of validStatuses" [value]="status">{{ status }}</option>
+      </select>
+    </div>
+    
+    <div>
+      <button type="submit">Update Status</button>
+    </div>
+  </form>
+</div>
