@@ -1,6 +1,3 @@
-# Disable Angular CLI cache
-ENV NG_DISABLE_CACHE=true
-
 # Use Node.js as the base image
 FROM node:18-alpine
 
@@ -9,6 +6,9 @@ WORKDIR /app
 
 # Install Angular CLI globally
 RUN npm install -g @angular/cli@18
+
+# Disable Angular CLI cache
+ENV NG_DISABLE_CACHE=true
 
 # Copy package.json and package-lock.json (if available)
 COPY package*.json ./
