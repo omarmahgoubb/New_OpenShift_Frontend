@@ -2,15 +2,19 @@
 FROM node:18-alpine as build
 WORKDIR /app
 
-# Install dependencies
+# Install dependencies and Angular CLI globally
 COPY package*.json ./
 RUN npm install
+RUN npm install -g @angular/cli
 
 # Copy the application source code
 COPY . .
 
+# Ensure Angular CLI is executable
+RUN chmod +x /usr/local/bin/ng
+
 # Build the Angular application for production
-RUN npm run build --prod
+RUN ng build --configuration production
 
 # Step 2: Serve the application using Nginx
 FROM nginx:alpine
