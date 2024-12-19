@@ -10,9 +10,6 @@ RUN npm install -g @angular/cli@18
 # Disable Angular CLI cache (as a fallback)
 ENV NG_DISABLE_CACHE=true
 
-# Redirect Angular CLI cache to /tmp (writable directory)
-ENV NG_CACHE_DIR=/tmp/.angular/cache
-
 # Copy package.json and package-lock.json (if available)
 COPY package*.json ./
 
@@ -25,5 +22,5 @@ COPY . .
 # Expose port 4200 to the host
 EXPOSE 4200
 
-# Run the Angular application using ng serve
-CMD ["ng", "serve", "--host", "0.0.0.0", "--port", "4200"]
+# Clear Angular cache directory before starting the server
+CMD ["sh", "-c", "rm -rf /app/.angular/cache && ng serve --host 0.0.0.0 --port 4200"]
