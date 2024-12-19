@@ -1,26 +1,23 @@
-# Use Node.js as the base image
-FROM node:18-alpine
-
-# Set the working directory inside the container
+# Step 1: Build the Angular application
+FROM node:18-alpine as build
 WORKDIR /app
 
-# Install Angular CLI globally
-RUN npm install -g @angular/cli@18
-
-# Disable Angular CLI cache (as a fallback)
-ENV NG_DISABLE_CACHE=true
-
-# Copy package.json and package-lock.json (if available)
+# Install dependencies
 COPY package*.json ./
-
-# Install project dependencies
 RUN npm install
 
-# Copy the rest of the application source code
+# Copy the application source code
 COPY . .
 
-# Expose port 4200 to the host
-EXPOSE 4200
+# Build the Angular application for production
+RUN npm run build --prod
 
-# Clear Angular cache directory before starting the server
-CMD ["sh", "-c", "rm -rf /app/.angular/cache && ng serve --host 0.0.0.0 --port 4200"]
+# Step 2: Serve the application using Nginx
+FROM nginx:alpine
+COPY --from=build /app/dist/first-angular-app /usr/share/nginx/html
+
+# Expose port 80
+EXPOSE 80
+
+# Start Nginx
+CMD ["nginx", "-g", "daemon off;"]
