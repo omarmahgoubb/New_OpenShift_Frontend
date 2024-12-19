@@ -7,8 +7,11 @@ WORKDIR /app
 # Install Angular CLI globally
 RUN npm install -g @angular/cli@18
 
-# Disable Angular CLI cache
+# Disable Angular CLI cache (as a fallback)
 ENV NG_DISABLE_CACHE=true
+
+# Redirect Angular CLI cache to /tmp (writable directory)
+ENV NG_CACHE_DIR=/tmp/.angular/cache
 
 # Copy package.json and package-lock.json (if available)
 COPY package*.json ./
