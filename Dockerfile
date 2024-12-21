@@ -1,36 +1,28 @@
-# Step 1: Build the Angular application
+# Step 1: Build the Angular app
 FROM node:18-alpine AS build
-
-# Set the working directory inside the container
 WORKDIR /app
-
-# Install Angular CLI globally
-RUN npm install -g @angular/cli
-
-# Copy package.json and package-lock.json (if available)
+RUN npm install -g @angular/cli@latest
 COPY package*.json ./
-
-# Install project dependencies
 RUN npm install
-
-# Copy the rest of the application source code
 COPY . .
-
-# Build the Angular application for production
 RUN ng build --configuration production
 
-# Step 2: Serve the built application with Nginx
+# Step 2: Use nginx to serve the built files
 FROM nginx:latest
 
-# Copy the built Angular application from the previous stage
+# Overwrite nginx.conf without user directive
+COPY nginx.conf /etc/nginx/nginx.conf
+
+# Copy the Angular build output
 COPY --from=build /app/dist/first-angular-app /usr/share/nginx/html
 
-# Copy the custom Nginx configuration
-COPY nginx.conf /etc/nginx/conf.d/default.conf
+# Copy your default.conf into the conf.d directory
+COPY default.conf /etc/nginx/conf.d/default.conf
 
-# Expose port 80
-EXPOSE 80
+# Adjust permissions if running in OpenShift or other restricted env
+RUN chgrp -R 0 /usr/share/nginx/html /var/cache/nginx /var/run /var/log/nginx && \
+    chmod -R g+rwX /usr/share/nginx/html /var/cache/nginx /var/run /var/log/nginx
 
-# Start Nginx
+EXPOSE 8080
 CMD ["nginx", "-g", "daemon off;"]
 
