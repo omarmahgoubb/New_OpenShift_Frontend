@@ -23,7 +23,7 @@ export class UpdateOrderStatusComponent {
       new_status: this.new_status,
     };
 
-    this.http.post('http://localhost:5000/update_order_status', orderData)
+    this.http.post('https://pythontest-omarmahgoub-dev.apps.rm3.7wse.p1.openshiftapps.com/update_order_status', orderData)
       .subscribe(
         (response: any) => {
           console.log(response);

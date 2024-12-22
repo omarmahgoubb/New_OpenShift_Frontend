@@ -22,7 +22,7 @@ export class CourierInfoComponent {
 
   getOrdersByCourier() {
     console.log("Fetching orders for courier:", this.courierName);
-    const url = `http://127.0.0.1:5000/orders_by_courier/${this.courierName}`; // Use a route parameter
+    const url = `https://pythontest-omarmahgoub-dev.apps.rm3.7wse.p1.openshiftapps.com/orders_by_courier/${encodeURIComponent(this.courierName)}`; // Use a route parameter
 
     this.http.get(url, { 
       headers: { 'Content-Type': 'application/json' },
@@ -39,65 +39,63 @@ export class CourierInfoComponent {
         this.orders = []; 
       }
     );
-}
+  }
 
-acceptOrder(orderId: string) {
-  console.log("Accepting order ID:", orderId);
-  const url = `http://127.0.0.1:5000/accept_order`;
+  acceptOrder(orderId: string) {
+    console.log("Accepting order ID:", orderId);
+    const url = `https://pythontest-omarmahgoub-dev.apps.rm3.7wse.p1.openshiftapps.com/accept_order`;
 
-  const body = {
-    order_id: orderId,
-    courier: this.courierName // Include the courier name in the request body
-  };
+    const body = {
+      order_id: orderId,
+      courier: this.courierName // Include the courier name in the request body
+    };
 
-  this.http.post(url, body, { 
-    headers: { 'Content-Type': 'application/json' },
-  })
-  .subscribe(
-    (response: any) => {
-      console.log("Order accepted:", response);
-      // Update the order status in the local list
-      const order = this.orders.find(o => o.order_id === orderId);
-      if (order) {
-        order.order_status = 'Accepted by courier';
+    this.http.post(url, body, { 
+      headers: { 'Content-Type': 'application/json' },
+    })
+    .subscribe(
+      (response: any) => {
+        console.log("Order accepted:", response);
+        // Update the order status in the local list
+        const order = this.orders.find(o => o.order_id === orderId);
+        if (order) {
+          order.order_status = 'Accepted by courier';
+        }
+        this.errorMessage = ''; 
+      },
+      (error) => {
+        console.error("Error accepting order:", error);
+        this.errorMessage = error.error.message || 'An error occurred while accepting the order'; 
       }
-      this.errorMessage = ''; 
-    },
-    (error) => {
-      console.error("Error accepting order:", error);
-      this.errorMessage = error.error.message || 'An error occurred while accepting the order'; 
-    }
-  );
-}
+    );
+  }
 
-rejectOrder(orderId: string) {
-  console.log("Rejecting order ID:", orderId);
-  const url = `http://127.0.0.1:5000/reject_order`;
+  rejectOrder(orderId: string) {
+    console.log("Rejecting order ID:", orderId);
+    const url = `https://pythontest-omarmahgoub-dev.apps.rm3.7wse.p1.openshiftapps.com/reject_order`;
 
-  const body = {
-    order_id: orderId,
-    courier: this.courierName // Include the courier name in the request body
-  };
+    const body = {
+      order_id: orderId,
+      courier: this.courierName // Include the courier name in the request body
+    };
 
-  this.http.post(url, body, { 
-    headers: { 'Content-Type': 'application/json' },
-  })
-  .subscribe(
-    (response: any) => {
-      console.log("Order rejected:", response);
-      // Update the order status in the local list
-      const order = this.orders.find(o => o.order_id === orderId);
-      if (order) {
-        order.order_status = 'order rejected by courier';
+    this.http.post(url, body, { 
+      headers: { 'Content-Type': 'application/json' },
+    })
+    .subscribe(
+      (response: any) => {
+        console.log("Order rejected:", response);
+        // Update the order status in the local list
+        const order = this.orders.find(o => o.order_id === orderId);
+        if (order) {
+          order.order_status = 'Order rejected by courier';
+        }
+        this.errorMessage = ''; 
+      },
+      (error) => {
+        console.error("Error rejecting order:", error);
+        this.errorMessage = error.error.message || 'An error occurred while rejecting the order'; 
       }
-      this.errorMessage = ''; 
-    },
-    (error) => {
-      console.error("Error rejecting order:", error);
-      this.errorMessage = error.error.message || 'An error occurred while rejecting the order'; 
-    }
-  );
-}
-
-
+    );
+  }
 }

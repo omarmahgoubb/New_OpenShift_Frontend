@@ -8,7 +8,7 @@ import { NgIf, CommonModule } from '@angular/common';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css'],
   standalone: true,
-  imports: [FormsModule, NgIf, CommonModule, HttpClientModule] ,
+  imports: [FormsModule, NgIf, CommonModule, HttpClientModule],
 })
 export class LoginComponent {
   message: string = ''; 
@@ -18,16 +18,17 @@ export class LoginComponent {
   onLogin(form: NgForm) {
     if (form.valid) {
       const { email, password } = form.value;
-      this.http.post('http://127.0.0.1:5000/login', { email, password }).subscribe(
-        response => {
-          this.isError = false;
-          this.message = 'User Logged in successfully';
-        },
-        error => {
-          this.isError = true;
-          this.message = error.error.message || 'Login failed';
-        }
-      );
+      this.http.post('https://pythontest-omarmahgoub-dev.apps.rm3.7wse.p1.openshiftapps.com/login', { email, password })
+        .subscribe(
+          response => {
+            this.isError = false;
+            this.message = 'User Logged in successfully';
+          },
+          error => {
+            this.isError = true;
+            this.message = error.error.message || 'Login failed';
+          }
+        );
     }
   }
 }

@@ -27,7 +27,7 @@ export class AssignedOrdersComponent implements OnInit {
       return;
     }
 
-    this.http.get<any[]>(`http://localhost:5000/assigned-to-courier?courier=${this.courierName}`)
+    this.http.get<any[]>(`https://pythontest-omarmahgoub-dev.apps.rm3.7wse.p1.openshiftapps.com/assigned-to-courier?courier=${encodeURIComponent(this.courierName)}`)
       .subscribe(
         data => {
           this.orders = data;
@@ -57,7 +57,7 @@ export class AssignedOrdersComponent implements OnInit {
       courier: newCourierName
     };
 
-    this.http.put(`http://localhost:5000/reassign`, requestBody)
+    this.http.put(`https://pythontest-omarmahgoub-dev.apps.rm3.7wse.p1.openshiftapps.com/reassign`, requestBody)
       .subscribe(
         response => {
           alert('Order reassigned successfully');

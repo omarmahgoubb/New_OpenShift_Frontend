@@ -40,7 +40,7 @@ describe('OrderDetailsComponent', () => {
     component.orderId = '12345';  // Set a sample order ID
     component.getOrderDetails();  // Call the method to fetch order details
 
-    const req = httpMock.expectOne('http://127.0.0.1:5000/order_details/12345');  // Check that the correct API endpoint is called
+    const req = httpMock.expectOne('https://pythontest-omarmahgoub-dev.apps.rm3.7wse.p1.openshiftapps.com/order_details/12345');  // Check that the correct API endpoint is called
     expect(req.request.method).toBe('GET');  // Expect GET request
 
     req.flush({ order_details: mockOrderDetails });  // Simulate the API response
@@ -54,7 +54,7 @@ describe('OrderDetailsComponent', () => {
     component.orderId = '12345';
     component.getOrderDetails();
 
-    const req = httpMock.expectOne('http://127.0.0.1:5000/order_details/12345');
+    const req = httpMock.expectOne('https://pythontest-omarmahgoub-dev.apps.rm3.7wse.p1.openshiftapps.com/order_details/12345');
     expect(req.request.method).toBe('GET');
 
     req.flush(
@@ -78,10 +78,13 @@ describe('OrderDetailsComponent', () => {
       created_at: '2024-11-08T17:46:12.575+00:00',
     };
 
+    // Spy on console.log
+    spyOn(console, 'log');
+
     // Call cancelOrder
     component.cancelOrder();
 
-    const req = httpMock.expectOne('http://127.0.0.1:5000/order_details/12345');
+    const req = httpMock.expectOne('https://pythontest-omarmahgoub-dev.apps.rm3.7wse.p1.openshiftapps.com/order_details/12345');
     expect(req.request.method).toBe('PATCH');  // Expect PATCH request
 
     req.flush(mockResponse);  // Simulate a successful cancel response
@@ -102,7 +105,7 @@ describe('OrderDetailsComponent', () => {
 
     component.cancelOrder();
 
-    const req = httpMock.expectOne('http://127.0.0.1:5000/order_details/12345');
+    const req = httpMock.expectOne('https://pythontest-omarmahgoub-dev.apps.rm3.7wse.p1.openshiftapps.com/order_details/12345');
     expect(req.request.method).toBe('PATCH');
 
     req.flush(

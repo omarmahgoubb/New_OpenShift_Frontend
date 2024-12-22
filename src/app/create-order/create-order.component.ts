@@ -30,7 +30,7 @@ export class CreateOrderComponent {
       delivery_time: this.delivery_time
     };
 
-    this.http.post('http://localhost:5000/create_order', orderData)
+    this.http.post('https://pythontest-omarmahgoub-dev.apps.rm3.7wse.p1.openshiftapps.com/create_order', orderData)
       .subscribe(
         (response: any) => {
           console.log(response);

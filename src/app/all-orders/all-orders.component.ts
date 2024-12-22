@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { OrderResultModel } from '../models/OrderResultModel';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, NgForm } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 
 @Component({
@@ -9,13 +9,17 @@ import { CommonModule } from '@angular/common';
   standalone: true,
   imports: [FormsModule, CommonModule],
   templateUrl: './all-orders.component.html',
-  styleUrl: './all-orders.component.css',
+  styleUrls: ['./all-orders.component.css'],
 })
 export class AllOrdersComponent {
   orders: OrderResultModel[] = [];
   status: string = '';
   deliveryAddress: string = '';
   productId: string = '';
+
+  // Centralized API URL
+  private API_URL: string = 'https://pythontest-omarmahgoub-dev.apps.rm3.7wse.p1.openshiftapps.com';
+
   constructor(private http: HttpClient) {}
 
   ngOnInit() {
@@ -23,22 +27,28 @@ export class AllOrdersComponent {
   }
 
   getAllOrders() {
-    const endpoint = 'http://127.0.0.1:5000/manage_get_all';
+    const endpoint = `${this.API_URL}/manage_get_all`;
     this.http.get<any>(endpoint).subscribe({
       next: (data) => {
         this.orders = data.orders;
         console.log(this.orders);
       },
+      error: (err) => {
+        console.error('Error fetching orders:', err);
+      }
     });
   }
 
   deleteOrder(orderId: string): void {
-    const endpoint = `http://127.0.0.1:5000/manage_delete/${orderId}`;
+    const endpoint = `${this.API_URL}/manage_delete/${orderId}`;
     if (confirm('Are you sure you want to delete this order?')) {
       this.http.delete<any>(endpoint).subscribe({
         next: () => {
           this.getAllOrders();
         },
+        error: (err) => {
+          console.error('Error deleting order:', err);
+        }
       });
     }
   }
@@ -50,10 +60,14 @@ export class AllOrdersComponent {
       delivery_address: this.deliveryAddress,
     };
 
-    this.http.put('http://127.0.0.1:5000/manage_update', orderData).subscribe({
-      next: () => {},
+    const endpoint = `${this.API_URL}/manage_update`;
+    this.http.put<any>(endpoint, orderData).subscribe({
+      next: () => {
+        this.getAllOrders();
+      },
+      error: (err) => {
+        console.error('Error updating order:', err);
+      }
     });
-
-    this.getAllOrders();
   }
 }

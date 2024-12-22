@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class OrderDetailsService {
-  private apiUrl = 'http://localhost:5000/order_details';  // Set the base URL of the backend
+  private apiUrl = 'https://pythontest-omarmahgoub-dev.apps.rm3.7wse.p1.openshiftapps.com/order_details';  // Set the base URL of the backend
 
   constructor(private http: HttpClient) {}
 

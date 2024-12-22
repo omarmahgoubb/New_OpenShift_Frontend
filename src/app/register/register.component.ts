@@ -8,7 +8,7 @@ import { CommonModule, NgIf } from '@angular/common';
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.css'],
   standalone: true,
-  imports: [FormsModule, NgIf, CommonModule, HttpClientModule] ,
+  imports: [FormsModule, NgIf, CommonModule, HttpClientModule],
 })
 export class RegisterComponent {
   message: string = ''; 
@@ -19,16 +19,17 @@ export class RegisterComponent {
   onRegister(form: NgForm) {
     if (form.valid) {
       const { name, email, phone, password, role } = form.value;  // include role
-      this.http.post('http://127.0.0.1:5000/register', { name, email, phone, password, role }).subscribe(
-        response => {
-          this.isError = false;
-          this.message = 'User registered successfully';
-        },
-        error => {
-          this.isError = true;
-          this.message = error.error.message || 'Registration failed';
-        }
-      );
+      this.http.post('https://pythontest-omarmahgoub-dev.apps.rm3.7wse.p1.openshiftapps.com/register', { name, email, phone, password, role })
+        .subscribe(
+          response => {
+            this.isError = false;
+            this.message = 'User registered successfully';
+          },
+          error => {
+            this.isError = true;
+            this.message = error.error.message || 'Registration failed';
+          }
+        );
     }
   }
 }

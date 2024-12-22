@@ -20,7 +20,7 @@ export class MyOrdersComponent implements OnInit {
   }
 
   fetchMyOrders() {
-    this.http.get<any>('http://localhost:5000/my_orders')  // Specify type for better type safety
+    this.http.get<any>('https://pythontest-omarmahgoub-dev.apps.rm3.7wse.p1.openshiftapps.com/my_orders')  // Updated backend URL
       .subscribe(
         (response) => {
           this.orders = response.orders;  // Ensure the response structure matches your backend

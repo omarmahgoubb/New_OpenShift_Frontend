@@ -22,8 +22,8 @@ export class OrderDetailsComponent {
 
   getOrderDetails() {
     console.log("Fetching order details for Order ID:", this.orderId);
-    const url = `http://127.0.0.1:5000/order_details/${this.orderId}`; // Full URL for debugging
-    
+    const url = `https://pythontest-omarmahgoub-dev.apps.rm3.7wse.p1.openshiftapps.com/order_details/${encodeURIComponent(this.orderId)}`; // Updated backend URL
+
     this.http.get(url, { 
       headers: { 'Content-Type': 'application/json' }, 
     })
@@ -49,7 +49,7 @@ export class OrderDetailsComponent {
     }
 
     console.log("Cancelling order with Order ID:", this.orderId);
-    const url = `http://127.0.0.1:5000/order_details/${this.orderId}`;
+    const url = `https://pythontest-omarmahgoub-dev.apps.rm3.7wse.p1.openshiftapps.com/order_details/${encodeURIComponent(this.orderId)}`; // Updated backend URL
     const body = { /* Add logic to fetch logged-in user’s email from the backend or session */ };
 
     this.http.patch(url, body, { 
